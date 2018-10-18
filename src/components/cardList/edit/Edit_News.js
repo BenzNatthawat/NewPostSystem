@@ -1,36 +1,56 @@
 import React, { Component } from 'react'
-import { Form } from 'semantic-ui-react'
 import { connect } from 'react-redux'
+import { reduxForm, Field } from 'redux-form';
 
-class FormExampleSubcomponentControl extends Component {
+class Edit_News extends Component {
   handleChange = (e, { value }) => this.setState({ value })
 
   render() {
-    let News_edit = this.props.NewsList
-    News_edit = News_edit.filter( News_one => {
-    if( News_one.id === Number(this.props.edit_id) )
-        return News_one;
-    } )
+    const { handleSubmit } = this.props
 
     return (
-      <Form>
-        <Form.Group widths='equal'>
-          <Form.Input fluid label='Titel' placeholder='Input Titel' value={News_edit[0].title} />
-        </Form.Group>
-        <Form.TextArea label='Detail' placeholder='Input Detail' value={News_edit[0].detail} />
-        <Form.Group>
-        <Form.Button color='blue'>SAVE</Form.Button>
-        <Form.Button color='red'>CANCEL</Form.Button>
-        </Form.Group>
-      </Form>
+      <form onSubmit={handleSubmit} className='ui form'>
+      <div className='field'>
+        <Field
+          name="title"
+          component="input"
+          type="text"
+          placeholder='Input Title'
+          // initialValues='{myFormData}'                         
+        />
+      </div>
+      <div className='field'>
+        <Field
+          name="detail"
+          component="textarea"
+          type="text"
+          placeholder="Input Detail"
+        />
+      </div>
+      <button type="submit" className='ui button'>SAVE</button>
+      </form>
+      
     )
   }
 }
 
-function mapStateToProps(state){
+function mapStateToProps(state, ownProps) {
+  let News_edit = []
+  News_edit = ownProps.newsall.find( News_one => {
+    if( News_one.id === Number(ownProps.edit_id) )
+        return News_one;
+    } )
   return {
-    NewsList: [...state.News.data]
+    initialValues: {
+      title: News_edit.title,
+      detail: News_edit.detail,
+      id: News_edit.id
+    }
   }
 }
 
-export default connect(mapStateToProps)(FormExampleSubcomponentControl)
+Edit_News = reduxForm({
+  form: 'Edit_News'
+})(Edit_News)
+
+export default connect(mapStateToProps)(Edit_News)

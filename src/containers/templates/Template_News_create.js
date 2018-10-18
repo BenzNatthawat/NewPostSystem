@@ -7,6 +7,9 @@ import { newsAction } from '../../redux/action/news'
 import CreateNews from '../../components/cardList/create/Create_News'
 
 class Template_News_all extends Component {  
+  submit = values => {
+    this.props.addNews(values)
+  }
   render() {
     const { news } = { ...this.props }
     if (news.length === 0) {
@@ -16,7 +19,7 @@ class Template_News_all extends Component {
     return (
       <div className='ui container padding-news-top'>
           <HeaderComponent />
-          <CreateNews />
+          <CreateNews onSubmit={this.submit} />
           <FooterComponent />
       </div>
     )
@@ -31,10 +34,13 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = (dispatch, state) => {
-    return{
-      getNewsAll: () => {
-        dispatch(newsAction.getNewsAll())
-      }
+  return{
+    getNewsAll: () => {
+      dispatch(newsAction.getNewsAll())
+    },
+    addNews: (data) => {
+      dispatch(newsAction.addNews(data))
+    }
   }
 }
 

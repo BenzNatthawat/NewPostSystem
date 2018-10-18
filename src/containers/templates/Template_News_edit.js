@@ -6,7 +6,11 @@ import { connect } from 'react-redux'
 import { newsAction } from '../../redux/action/news'
 import EditNews from '../../components/cardList/edit/Edit_News'
 
-class Template_News_all extends Component {  
+class Template_News_edit extends Component {  
+  submit = values => {
+    console.log(values);
+    this.props.editNews(values)
+  }
   render() {
     const { news } = { ...this.props }
     if (news.length === 0) {
@@ -16,7 +20,7 @@ class Template_News_all extends Component {
     return (
       <div className='ui container padding-news-top'>
           <HeaderComponent />
-          <EditNews edit_id={this.props.match.params.id}/>
+          <EditNews onSubmit={this.submit} edit_id={this.props.match.params.id} newsall={news}/>
           <FooterComponent />
       </div>
     )
@@ -34,8 +38,11 @@ const mapDispatchToProps = (dispatch, state) => {
     return{
       getNewsAll: () => {
         dispatch(newsAction.getNewsAll())
+      },
+      editNews: (data) => {
+        dispatch(newsAction.editNews(data))
       }
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Template_News_all);
+export default connect(mapStateToProps, mapDispatchToProps)(Template_News_edit);

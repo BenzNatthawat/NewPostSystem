@@ -1,43 +1,36 @@
 import React, { Component } from 'react'
-import { Form, Button } from 'semantic-ui-react'
-import { connect } from 'react-redux';
-import { reduxForm } from 'redux-form';
+import { reduxForm, Field } from 'redux-form'
 
-class FormExampleSubcomponentControl extends Component {
-  state = {}
-
-  handleChange = (e, { value }) => this.setState({ value })
+class Create_News extends Component {
 
   render() {
     const { handleSubmit } = this.props
     return (
-      <Form onSubmit={handleSubmit}>
-        <Form.Group widths='equal'>
-          <Form.Input fluid label='Titel' placeholder='Input Titel' />
-        </Form.Group>
-        <Form.TextArea label='Detail' placeholder='Input Detail' />
-        <Form.Group>
-        <Form.Button color='red'>CANCEL</Form.Button>
-        <Form.Field control={Button} primary
-        type='submit'>
-        SAVE
-        </Form.Field>
-        </Form.Group>
-      </Form>
+      <form onSubmit={handleSubmit} className='ui form'>
+        <div className='field'>
+          <Field
+            name="title"
+            component="input"
+            type="text"
+            placeholder="Input Titel"
+          />
+        </div>
+        <div className='field'>
+          <Field
+            name="detail"
+            component="textarea"
+            type="text"
+            placeholder="Input Detail"
+          />
+        </div>
+        <button type="submit" className='ui button'>SAVE</button>
+      </form>
     )
   }
 }
 
-FormExampleSubcomponentControl = reduxForm({
-  form : 'FormExampleSubcomponentControl'
-})(FormExampleSubcomponentControl)
+Create_News = reduxForm({
+  form: 'Create_News'
+})(Create_News)
 
-FormExampleSubcomponentControl = connect(
-  state => ({
-    initialValues: {
-      user: JSON.parse(localStorage.getItem("userId"))
-    }
-  })
-)(FormExampleSubcomponentControl)
-
-export default FormExampleSubcomponentControl
+export default Create_News
