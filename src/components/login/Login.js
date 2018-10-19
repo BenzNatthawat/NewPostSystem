@@ -1,8 +1,8 @@
 import React from 'react'
-import { Grid, Header, Segment, Message, Icon } from 'semantic-ui-react'
+import { Grid, Header, Message, Icon } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
-import Login_Form from './Login_form'
+import LoginForm from './Login_form'
 
 const Login = () => {
   const submit = values => {
@@ -15,7 +15,7 @@ const Login = () => {
         <Header as='h2' color='teal' textAlign='center'>
           LOGIN
         </Header>
-        <Login_Form  onSubmit={submit}/>
+        <LoginForm onSubmit={submit}/>
         <Message>
           New to us? <Link to="/register">Sign Up</Link>
         </Message>

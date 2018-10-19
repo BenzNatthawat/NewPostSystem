@@ -8,45 +8,51 @@ class Edit_News extends Component {
   render() {
     const { handleSubmit } = this.props
 
-    return (
-      <form onSubmit={handleSubmit} className='ui form'>
-      <div className='field'>
-        <Field
-          name="title"
-          component="input"
-          type="text"
-          placeholder='Input Title'
-          // initialValues='{myFormData}'                         
-        />
-      </div>
-      <div className='field'>
-        <Field
-          name="detail"
-          component="textarea"
-          type="text"
-          placeholder="Input Detail"
-        />
-      </div>
-      <button type="submit" className='ui button'>SAVE</button>
-      </form>
-      
-    )
+    if(this.props.mess === 'error' )
+      return (
+        <div>ค้นหา ไม่เจอข่าวที่ต้องการแก้ไข</div>
+      )
+    else
+      return (
+        <form onSubmit={handleSubmit} className='ui form'>
+        <div className='field'>
+          <Field
+            name="title"
+            component="input"
+            type="text"
+            placeholder='Input Title'                       
+          />
+        </div>
+        <div className='field'>
+          <Field
+            name="detail"
+            component="textarea"
+            type="text"
+            placeholder="Input Detail"
+          />
+        </div>
+        <button type="submit" className='ui button'>SAVE</button>
+        </form>
+        
+      )
   }
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state, Newsall) {
   let News_edit = []
-  News_edit = ownProps.newsall.find( News_one => {
-    if( News_one.id === Number(ownProps.edit_id) )
-        return News_one;
-    } )
-  return {
-    initialValues: {
-      title: News_edit.title,
-      detail: News_edit.detail,
-      id: News_edit.id
+  News_edit = Newsall.newsall.find( News_one => (Number(News_one.id) === Number(Newsall.edit_id) ? News_one : 0) )
+  if( typeof News_edit !== 'undefined' )
+    return {
+      initialValues: {
+        title: News_edit.title,
+        detail: News_edit.detail,
+        id: News_edit.id
+      }
     }
-  }
+  else
+    return {
+      mess: 'error'
+    }
 }
 
 Edit_News = reduxForm({

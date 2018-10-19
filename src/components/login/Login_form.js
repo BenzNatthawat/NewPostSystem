@@ -14,38 +14,37 @@ class LoginForm extends Component {
             height: 100%;
           }
         `}</style>
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>First Name</label>
-        <div>
-          <Field
-            name="firstName"
-            component="input"
-            type="text"
-            placeholder="First Name"
-          />
-        </div>
-      </div>
-      <div>
-        <label>Last Name</label>
-        <div>
-          <Field
-            name="lastName"
-            component="input"
-            type="text"
-            placeholder="Last Name"
-          />
-        </div>
-      </div>
-      <div>
-        <button type="submit">
-          Submit
-        </button>
-        <button type="button">
-          Clear Values
-        </button>
-      </div>
-    </form>
+          <form onSubmit={handleSubmit} className='ui form'>
+          <div className='ui stacked segment'>
+            <div className='field'>
+              <div className='ui fluid left icon input'>
+                <Field
+                  name="user"
+                  component="input"
+                  type="text"
+                  placeholder="User"
+                />  
+                <i aria-hidden="true" className="user icon"></i>
+              </div>
+            </div>
+            <div className='field'>
+              <div className='ui fluid left icon input'>
+                <Field
+                  name="password"
+                  component="input"
+                  type="password"
+                  placeholder="Password"
+                />
+                <i aria-hidden="true" className="lock icon"></i>
+              </div>
+            </div>
+            <div>
+              <button type="submit" className='ui teal large fluid button'>
+                Submit
+              </button>
+            </div>
+          </div>
+          </form>
       </div>
     )
   }
