@@ -6,6 +6,11 @@ const allNews = (data) => ({
   payload: data
 })
 
+const oneNews = (data) => ({
+  type: type.NEWS.GET,
+  payload: data
+})
+
 const getNewsAll = () => async (dispatch) => {
   try{
     const response = await Service.News.getNewsAll()
@@ -13,6 +18,16 @@ const getNewsAll = () => async (dispatch) => {
     
   }catch(err){
     console.log("ACTION_GETNEWSALL: ", err)
+  }
+}
+
+const getOneNews = (data) => async (dispatch) => {
+  try{
+    const response = await Service.News.getOneNews(data)
+    dispatch(oneNews(response.data))
+    
+  }catch(err){
+    console.log("ACTION_GETONENEWSALL: ", err)
   }
 }
 
@@ -30,6 +45,7 @@ const editNews = (data) => async (dispatch) => {
   try{
     const response = await Service.News.editNews(data)
     console.log(response)
+    dispatch(getNewsAll())
   }catch(err){
     console.log("ACTION_EDITNEWS: ", err)
   }
@@ -38,5 +54,6 @@ const editNews = (data) => async (dispatch) => {
 export const newsAction = {
   getNewsAll,
   addNews,
-  editNews
+  editNews,
+  getOneNews
 }

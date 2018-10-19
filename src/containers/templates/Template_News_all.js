@@ -30,7 +30,7 @@ function mapStateToProps(state) {
   }
 }
 
-const mapDispatchToProps = (dispatch, state) => {
+const mapDispatchToProps = (dispatch) => {
     return{
       getNewsAll: () => {
         dispatch(newsAction.getNewsAll())

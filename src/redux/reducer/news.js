@@ -1,7 +1,8 @@
 import {NEWS} from '../../constants/ActionTypes'
 
 const news = {
-  data: []
+  data: [],
+  newsone: {}
 }
 
 export default function NewsReducer(state = news, action){

@@ -13,6 +13,7 @@ class Create_News extends Component {
             component="input"
             type="text"
             placeholder="Input Titel"
+            autoComplete='off'
           />
         </div>
         <div className='field'>

@@ -11,6 +11,13 @@ export default {
       console.log('SERVICE_GETNEWSALL: ', error)
     }
   },
+  getOneNews: async (id) => {
+    try {
+      return await axios.get(`${config.baseURL}/news/${id}`)
+    } catch (error) {
+      console.log('SERVICE_GETONENEWSALL: ', error)
+    }
+  },
   deleteNews: async (id) => {
     try {
       return await axios.delete(`${config.baseURL}/news/${id}`)
