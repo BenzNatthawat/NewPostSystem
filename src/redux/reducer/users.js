@@ -2,7 +2,7 @@ import {NEWS} from '../../constants/ActionTypes'
 
 const news = {
   data: [],
-  data_user: []
+  newsone: {}
 }
 
 export default function NewsReducer(state = news, action){
@@ -16,11 +16,6 @@ export default function NewsReducer(state = news, action){
     return{
       ...state,
       data: action.payload
-    }
-    case NEWS.USER:
-    return{
-      ...state,
-      data_user: action.payload
     }
     default:
     return state

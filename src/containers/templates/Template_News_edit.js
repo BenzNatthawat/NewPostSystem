@@ -14,7 +14,7 @@ class Template_News_edit extends Component {
   render() {
     const { news } = { ...this.props }
     if (news.length === 0) {
-      this.props.getNewsAll()
+      this.props.getOneNews(this.props.match.params.id)
       return ''
     } else {
     return (
@@ -36,8 +36,8 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = (dispatch, state) => {
     return{
-      getNewsAll: () => {
-        dispatch(newsAction.getNewsAll())
+      getOneNews: (data) => {
+        dispatch(newsAction.getOneNews(data))
       },
       editNews: (data) => {
         dispatch(newsAction.editNews(data))

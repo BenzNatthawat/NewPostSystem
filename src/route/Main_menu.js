@@ -4,8 +4,9 @@ import { Switch, Route } from 'react-router-dom'
 import Template_News_all from '../containers/templates/Template_News_all'
 import Template_News_edit from '../containers/templates/Template_News_edit'
 import Create_News from '../containers/templates/Template_News_create'
+import Template_News_user from '../containers/templates/Template_News_user'
 import Login_Form from '../components/login/Login'
-import register_Form from '../components/register/register'
+import register_Form from '../components/register/Register'
 
 const Main_menu = () => {
   return (
@@ -14,6 +15,7 @@ const Main_menu = () => {
       <Route path='/register' component={register_Form} />
       <Route exact path='/' component={Template_News_all} />
       <Route path='/news/:id' component={Template_News_edit} />
+      <Route path='/name' component={Template_News_user} />
       <Route path='/add' component={Create_News} />
     </Switch>
   )

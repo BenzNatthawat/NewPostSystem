@@ -1,11 +1,9 @@
-// import { setting } from './setting';
 import axios from 'axios';
 import config from './config'
 
 export default {
   getNewsAll: async () => {
     try {
-      // return await setting().then(async (call) => call.get('/news')).then(async (data) => data.data)
       return await axios.get(`${config.baseURL}/news`)
     } catch (error) {
       console.log('SERVICE_GETNEWSALL: ', error)
@@ -37,6 +35,13 @@ export default {
       return await axios.put(`${config.baseURL}/news/${data.id}/`,data)
     } catch (error) {
       console.log('SERVICE_EDITNEWS: ', error)
+    }
+  },
+  getNews_only_user: async (data) => {
+    try {
+      return await axios.get(`${config.baseURL}/user/${data}/news`)
+    } catch (error) {
+      console.log('SERVICE_GETNEWSALL: ', error)
     }
   }
 }

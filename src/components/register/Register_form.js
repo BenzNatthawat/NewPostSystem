@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 
-class LoginForm extends Component {
+class registerForm extends Component {
 
   render() {
     const { handleSubmit } = this.props
@@ -19,12 +19,34 @@ class LoginForm extends Component {
             <div className='field'>
               <div className='ui fluid left icon input'>
                 <Field
+                  name="first_name"
+                  component="input"
+                  type="text"
+                  placeholder="First Name"
+                />  
+                <i aria-hidden="true" className="user icon"></i>
+              </div>
+            </div>
+            <div className='field'>
+              <div className='ui fluid left icon input'>
+                <Field
+                  name="last_name"
+                  component="input"
+                  type="text"
+                  placeholder="Last Name"
+                />  
+                <i aria-hidden="true" className="user icon"></i>
+              </div>
+            </div>
+            <div className='field'>
+              <div className='ui fluid left icon input'>
+                <Field
                   name="username"
                   component="input"
                   type="text"
                   placeholder="User"
                 />  
-                <i aria-hidden="true" className="user icon"></i>
+                <i aria-hidden="true" className="users icon"></i>
               </div>
             </div>
             <div className='field'>
@@ -34,6 +56,17 @@ class LoginForm extends Component {
                   component="input"
                   type="password"
                   placeholder="Password"
+                />
+                <i aria-hidden="true" className="lock icon"></i>
+              </div>
+            </div>
+            <div className='field'>
+              <div className='ui fluid left icon input'>
+                <Field
+                  name="repassword"
+                  component="input"
+                  type="password"
+                  placeholder="Re Password"
                 />
                 <i aria-hidden="true" className="lock icon"></i>
               </div>
@@ -50,8 +83,8 @@ class LoginForm extends Component {
   }
 }
 
-LoginForm = reduxForm({
-  form: 'LoginForm'
-})(LoginForm)
+registerForm = reduxForm({
+  form: 'registerForm'
+})(registerForm)
 
-export default LoginForm
+export default registerForm
