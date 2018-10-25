@@ -8,8 +8,9 @@ import { userAction } from '../../redux/action/users'
 class Register extends Component {  
   submit = values => {
     if(values.password === values.repassword){
+      const {history} = this.props
       delete values.repassword;
-      this.props.addUser(values)
+      this.props.addUser(values, history)
     }
     else
       console.log(false)
@@ -32,8 +33,8 @@ class Register extends Component {
 
 const mapDispatchToProps = (dispatch, state) => {
   return{
-    addUser: (data) => {
-      dispatch(userAction.addUser(data))
+    addUser: (data, history) => {
+      dispatch(userAction.addUser(data, history))
     }
   }
 }

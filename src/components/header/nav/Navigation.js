@@ -8,16 +8,19 @@ export default class MenuExampleNameProp extends Component {
   handleItemClick = (e, { name }) => {
     this.setState({ activeItem: name })
     if(name === "login")
-      this.setState({ login_member: 0 })
-    else if(name === "logout")
       this.setState({ login_member: 1 })
-
-
+    else if(name === "logout")
+      this.setState({ login_member: 0 })
   }
-
+  logout = () => {
+    localStorage.removeItem("userId_login")
+  }
+  
   render() {
     const { activeItem } = this.state
-    let login_member = 1  
+    let login_member = 0
+    if(localStorage.userId_login)
+       login_member = 1
     return (
       <Menu pointing>
         <Menu.Item
@@ -39,7 +42,7 @@ export default class MenuExampleNameProp extends Component {
           as={NavLink} to='/add'
         />
         {(
-          login_member === 1 ?
+          login_member === 0 ?
           <Menu.Item
             name='login'
             active={activeItem === 'login'}
@@ -49,12 +52,14 @@ export default class MenuExampleNameProp extends Component {
           <Menu.Item
             name='logout'
             active={activeItem === 'logout'}
-            onClick={this.handleItemClick}
             as={NavLink} to='/logout'
+            onClick={this.logout}
           />
         )}
       </Menu>
 
     )
   }
+
+
 }

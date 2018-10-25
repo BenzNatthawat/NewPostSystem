@@ -40,7 +40,7 @@ const addNews = (data) => async (dispatch) => {
   try{
     console.log(localStorage.userId_login)
     if(localStorage.userId_login)
-      data.user = localStorage.userId_login
+      data.user = parseInt(localStorage.userId_login)
     const response = await Service.News.addNews(data)
     console.log(response)
   }catch(err){
