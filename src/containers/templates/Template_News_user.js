@@ -6,13 +6,14 @@ import { connect } from 'react-redux'
 import { newsAction } from '../../redux/action/news'
 import CardList from '../../components/cardList/index/CardList'
 
-class Template_News_user extends Component {  
+class Template_News_user extends Component { 
   render() {
     const { news_user } = { ...this.props }
-    if (news_user.length === 0) {
+    if (news_user.length === 0 || news_user[0].err ) {
       this.props.getNews_only_user()
       return 'loading...'
     } else {
+      this.props.getNews_only_user()
     return (
       <div className='ui container padding-news-top'>
           <HeaderComponent />
@@ -25,9 +26,12 @@ class Template_News_user extends Component {
 }
 
 function mapStateToProps(state) {
-  return {
-    news_user: [...state.News.data_user],
-  }
+  if(state.News.data_user.length === 0)
+    return {news_user:[{err:null}]}
+  else
+    return {
+      news_user: [...state.News.data_user],
+    }
 }
 
 const mapDispatchToProps = (dispatch) => {

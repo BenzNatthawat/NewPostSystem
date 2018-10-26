@@ -1,6 +1,5 @@
 export const NEWS = {
   GET: 'NEWS_GET',
-  RELOAD: 'NEWS_RELOAD',
   USER: 'NEWS_USER'
 }
 Object.freeze(NEWS)
@@ -14,3 +13,9 @@ export const LOGIN = {
   AUTH: 'LOGIN_AUTH'
 }
 Object.freeze(LOGIN)
+
+export const LOADING = {
+  OPEN: 'LOAD_OPEN',
+  CLOSE: 'LOAD_CLOSE'
+}
+Object.freeze(LOADING)

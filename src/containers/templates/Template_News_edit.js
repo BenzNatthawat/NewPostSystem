@@ -8,7 +8,6 @@ import EditNews from '../../components/cardList/edit/Edit_News'
 
 class Template_News_edit extends Component {  
   submit = values => {
-    console.log(values);
     this.props.editNews(values)
   }
   render() {
@@ -17,11 +16,12 @@ class Template_News_edit extends Component {
       this.props.getOneNews(this.props.match.params.id)
       return ''
     } else {
+
     return (
       <div className='ui container padding-news-top'>
-          <HeaderComponent />
-          <EditNews onSubmit={this.submit} edit_id={this.props.match.params.id} newsall={news}/>
-          <FooterComponent />
+        <HeaderComponent />
+        <EditNews onSubmit={this.submit} edit_id={this.props.match.params.id} newsall={news}/>
+        <FooterComponent />
       </div>
     )
     }

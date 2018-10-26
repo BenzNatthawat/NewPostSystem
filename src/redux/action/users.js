@@ -1,6 +1,6 @@
 import { Service } from '../../service';
 
-const addUser = (data, history) => async (dispatch) => {
+const addUser = (data, history) => async () => {
   try{
     const response = await Service.Users.addUser(data)
     console.log(response)

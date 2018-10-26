@@ -8,7 +8,8 @@ import CreateNews from '../../components/cardList/create/Create_News'
 
 class Template_News_all extends Component {  
   submit = values => {
-    this.props.addNews(values)
+    const {history} = this.props
+    this.props.addNews(values, history)
   }
   render() {
     const { news } = { ...this.props }
@@ -38,8 +39,8 @@ const mapDispatchToProps = (dispatch, state) => {
     getNewsAll: () => {
       dispatch(newsAction.getNewsAll())
     },
-    addNews: (data) => {
-      dispatch(newsAction.addNews(data))
+    addNews: (data, history) => {
+      dispatch(newsAction.addNews(data, history))
     }
   }
 }

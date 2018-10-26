@@ -22,6 +22,7 @@ export default class MenuExampleNameProp extends Component {
     if(localStorage.userId_login)
        login_member = 1
     return (
+      <div>
       <Menu pointing>
         <Menu.Item
           name='all'
@@ -29,12 +30,21 @@ export default class MenuExampleNameProp extends Component {
           onClick={this.handleItemClick}
           as={NavLink} to='/'
         />
-        <Menu.Item
-          name='name'
-          active={activeItem === 'name'}
-          onClick={this.handleItemClick}
-          as={NavLink} to='/name'
-        />
+         {(
+          login_member === 0 ?
+          <Menu.Item
+            name='name'
+            active={activeItem === 'name'}
+            onClick={this.handleItemClick}
+            as={NavLink} to='/login'
+          /> :
+          <Menu.Item
+            name='name'
+            active={activeItem === 'name'}
+            onClick={this.handleItemClick}
+            as={NavLink} to='/name'
+          />
+         )}
         <Menu.Item
           name='add'
           active={activeItem === 'add'}
@@ -42,22 +52,22 @@ export default class MenuExampleNameProp extends Component {
           as={NavLink} to='/add'
         />
         {(
-          login_member === 0 ?
+          login_member === 1 ?
+          <Menu.Item
+            name='logout'
+            active={activeItem === 'logout'}
+            as={NavLink} to='/logout  '
+            onClick={this.logout}
+          /> : 
           <Menu.Item
             name='login'
             active={activeItem === 'login'}
             onClick={this.handleItemClick}
             as={NavLink} to='/login'
-          /> : 
-          <Menu.Item
-            name='logout'
-            active={activeItem === 'logout'}
-            as={NavLink} to='/logout'
-            onClick={this.logout}
           />
         )}
       </Menu>
-
+    </div>
     )
   }
 

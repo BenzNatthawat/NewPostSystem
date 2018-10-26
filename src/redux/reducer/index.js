@@ -3,6 +3,7 @@ import { reducer as reduxFormReducer } from 'redux-form'
 
 import News from './news';
 import Users from './users';
+import Loading from './loading';
 import Login from './login';
 
 const rootReducer = combineReducers({
@@ -10,6 +11,7 @@ const rootReducer = combineReducers({
   News,
   Users,
   Login,
+  Loading,
 })
 
 export default rootReducer;
