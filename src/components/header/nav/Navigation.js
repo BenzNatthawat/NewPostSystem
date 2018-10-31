@@ -30,21 +30,12 @@ export default class MenuExampleNameProp extends Component {
           onClick={this.handleItemClick}
           as={NavLink} to='/'
         />
-         {(
-          login_member === 0 ?
-          <Menu.Item
-            name='name'
-            active={activeItem === 'name'}
-            onClick={this.handleItemClick}
-            as={NavLink} to='/login'
-          /> :
-          <Menu.Item
-            name='name'
-            active={activeItem === 'name'}
-            onClick={this.handleItemClick}
-            as={NavLink} to='/name'
-          />
-         )}
+        <Menu.Item
+          name='name'
+          active={activeItem === 'name'}
+          onClick={this.handleItemClick}
+          as={NavLink} to='/name'
+        />
         <Menu.Item
           name='add'
           active={activeItem === 'add'}

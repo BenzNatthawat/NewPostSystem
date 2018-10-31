@@ -1,26 +1,20 @@
-import React from 'react'
-import { Switch, Route, Redirect   } from 'react-router-dom'
+import React, { Component } from 'react'
+import { Switch, Route } from 'react-router-dom'
 
-import Template_News_all from '../containers/templates/Template_News_all'
-import Template_News_edit from '../containers/templates/Template_News_edit'
-import Create_News from '../containers/templates/Template_News_create'
-import Template_News_user from '../containers/templates/Template_News_user'
 import Login_Form from '../components/login/Login'
 import register_Form from '../components/register/Register'
+import Template_News from '../containers/templates/Template_News'
 
-const Main_menu = () => { 
-  return (
-    <Switch>
-      <Route path='/login' component={Login_Form} />
-      <Route path='/register' component={register_Form} />
-      <Route exact path='/' component={Template_News_all} />
-      <Route path='/news/:id' component={Template_News_edit} />
-      <Route path='/name' component={Template_News_user} />
-      <Route path='/add' component={Create_News} />
-      <Redirect to="/"/>
-    </Switch>
-  )
+class Main_menu extends Component{
+  render(){
+    return(
+      <Switch>
+        <Route exact path='/login' component={Login_Form} />
+        <Route exact path='/register' component={register_Form} />
+        <Route component={Template_News} />
+      </Switch>
+   )
+  }
 }
-
 
 export default Main_menu;

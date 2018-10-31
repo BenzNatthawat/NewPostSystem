@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import HeaderComponent from '../pages/Header_Component'
-import FooterComponent from '../pages/Footer_Component'
 import './Template_News.css'
 import { connect } from 'react-redux'
 import { newsAction } from '../../redux/action/news'
@@ -16,9 +14,7 @@ class Template_News_user extends Component {
       this.props.getNews_only_user()
     return (
       <div className='ui container padding-news-top'>
-          <HeaderComponent />
           <CardList news={news_user}/>
-          <FooterComponent />
       </div>
     )
     }

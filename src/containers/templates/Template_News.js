@@ -4,7 +4,7 @@ import FooterComponent from '../pages/Footer_Component'
 import './Template_News.css'
 import { connect } from 'react-redux'
 import { newsAction } from '../../redux/action/news'
-import CardList from '../../components/cardList/index/CardList'
+import Menu_news from '../../route/Menu_news'
 
 class Template_News_all extends Component {  
   render() {
@@ -16,7 +16,7 @@ class Template_News_all extends Component {
     return (
       <div className='ui container padding-news-top'>
           <HeaderComponent />
-          <CardList news={news}/>
+          <Menu_news />
           <FooterComponent />
       </div>
     )
