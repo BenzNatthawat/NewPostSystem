@@ -19,3 +19,9 @@ export const LOADING = {
   CLOSE: 'LOAD_CLOSE'
 }
 Object.freeze(LOADING)
+
+export const MODAL = {
+  SHOW: 'MODAL_SHOW',
+  CLOSE: 'MODAL_CLOSE'
+}
+Object.freeze(MODAL)

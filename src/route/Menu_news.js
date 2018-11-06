@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { Switch, Route, Redirect   } from 'react-router-dom'
 
-import Page_News_all from '../containers/templates/Page_News_all'
-import Page_News_edit from '../containers/templates/Page_News_edit'
-import Page_News_create from '../containers/templates/Page_News_create'
-import Page_News_user from '../containers/templates/Page_News_user'
+import Page_News_all from '../containers/pages/Page_News_all'
+import Page_News_edit from '../containers/pages/Page_News_edit'
+import Page_News_create from '../containers/pages/Page_News_create'
+import Page_News_user from '../containers/pages/Page_News_user'
 import PrivateRoute from './PrivateRoute'
 
-class menu_news extends Component{
+class Menu_news extends Component{
   render(){
     return(
       <Switch>
@@ -21,4 +21,4 @@ class menu_news extends Component{
   }
 }
 
-export default menu_news;
+export default Menu_news;

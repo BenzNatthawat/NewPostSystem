@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './Template_News.css'
+import './Page_News.css'
 import { connect } from 'react-redux'
 import { newsAction } from '../../redux/action/news'
 import CardList from '../../components/cardList/index/CardList'
