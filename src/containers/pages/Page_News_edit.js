@@ -1,44 +1,37 @@
 import React, { Component } from 'react'
 import './Page_News.css'
-import { connect } from 'react-redux'
-import { newsAction } from '../../redux/action/news'
 import EditNews from '../../components/cardList/edit/Edit_News'
+import { Query } from 'react-apollo'
+import gql from 'graphql-tag'
+
+const EDITNEWS = gql`
+    query editNews($id: ID!){
+      news(where:{id:$id}){
+        id
+        topic
+        description
+      }
+    }
+`
 
 class Template_News_edit extends Component {  
-  submit = values => {
-    this.props.editNews(values)
-  }
   render() {
-    const { news } = { ...this.props }
-    if (news.length === 0) {
-      this.props.getOneNews(this.props.match.params.id)
-      return ''
-    } else {
-
-    return (
-      <div className='ui container padding-news-top'>
-        <EditNews onSubmit={this.submit} edit_id={this.props.match.params.id} newsall={news}/>
-      </div>
-    )
-    }
+    const { id } = {...this.props.match.params}
+      return (
+        <Query query={EDITNEWS} variables={{ id }}>
+          {({ loading, error, data }) => {
+            if (loading) return <div>กำลังโหลดข่าว</div>
+            if (error) return <div>ไม่เจอข่าวที่ท่านกำลังค้นหา</div>
+            const news = {...data.news}
+            return (
+              <div className='ui container padding-news-top'>
+                <EditNews newsall={news} id={id}/>
+              </div>
+            )
+          }}
+        </Query>
+      )
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    news: [...state.News.data],
-  }
-}
-
-const mapDispatchToProps = (dispatch, state) => {
-    return{
-      getOneNews: (data) => {
-        dispatch(newsAction.getOneNews(data))
-      },
-      editNews: (data) => {
-        dispatch(newsAction.editNews(data))
-      }
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Template_News_edit);
+export default Template_News_edit;

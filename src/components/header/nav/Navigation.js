@@ -22,7 +22,7 @@ export default class MenuExampleNameProp extends Component {
     if(localStorage.userId_login)
        login_member = 1
     return (
-      <div>
+      <div style={{float: "right"}}>
       <Menu pointing>
         <Menu.Item
           name='all'
@@ -50,12 +50,20 @@ export default class MenuExampleNameProp extends Component {
             as={NavLink} to='/logout  '
             onClick={this.logout}
           /> : 
+            <Menu.Item
+              name='login'
+              active={activeItem === 'login'}
+              onClick={this.handleItemClick}
+              as={NavLink} to='/login'
+            />
+        )}
+        {(
           <Menu.Item
-            name='login'
-            active={activeItem === 'login'}
-            onClick={this.handleItemClick}
-            as={NavLink} to='/login'
-          />
+          name='register'
+          active={activeItem === 'register'}
+          onClick={this.handleItemClick}
+          as={NavLink} to='/register'
+        />
         )}
       </Menu>
     </div>

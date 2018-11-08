@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Switch, Route, Redirect   } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 
 import Page_News_all from '../containers/pages/Page_News_all'
 import Page_News_edit from '../containers/pages/Page_News_edit'
@@ -13,7 +13,7 @@ class Menu_news extends Component{
       <Switch>
         <Route exact path='/' component={Page_News_all} />
         <Route path='/news/:id' component={Page_News_edit} />
-        <PrivateRoute path='/name' component={Page_News_user} />
+        <PrivateRoute path='/name' componen t={Page_News_user} />
         <Route path='/add' component={Page_News_create} />
         <Redirect to="/"/>
       </Switch>

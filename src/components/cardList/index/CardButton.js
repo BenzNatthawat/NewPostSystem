@@ -1,39 +1,33 @@
 import React, { Component } from 'react'
 import './Card.css'
 import { NavLink } from 'react-router-dom'
-
-import { connect } from 'react-redux'
-
 import { Button } from 'semantic-ui-react'
-// import Modal from '../../Modal/Modal'
-import * as type from '../../../constants/ActionTypes';
+import { Mutation } from 'react-apollo'
+import gql from 'graphql-tag'
+
+const DELETENEWS = gql`
+  mutation DeleteNews( $id:ID! ) {
+    deleteNews( where:{ id: $id } ){
+      id
+    }
+}
+`
 
 class ButtonExampleEmphasisShorthand extends Component {
-  state = { open: false }
-
-  handleClickModal(cardid) {
-    this.props.showModal(cardid)
-  }
 
   render() {
+    const id = this.props.cardid
     return (
     <div className='footer-button'>
       <NavLink to={`news/${this.props.cardid}`}><Button color='teal' content='Edit' /></NavLink >
-      <Button onClick={() => this.handleClickModal(this.props.cardid) } color='red' content='Delete' />
+        <Mutation mutation={DELETENEWS} variables={{ id }}>
+          {DeleteNews  => {
+            return <Button color='red' onClick={DeleteNews}>DELETE</Button>}
+          }
+        </Mutation>
     </div>
     )
   }
 } 
 
-const mapDispatchToProps = (dispatch) => {
-	return{
-		showModal: (cardid) => {
-      dispatch({
-        type: type.MODAL.SHOW,
-        payload: cardid
-      })
-		}
-	}
-}
-
-export default connect(null, mapDispatchToProps)(ButtonExampleEmphasisShorthand)
+export default ButtonExampleEmphasisShorthand

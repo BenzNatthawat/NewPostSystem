@@ -1,37 +1,49 @@
 import React, { Component } from 'react'
-import { reduxForm, Field } from 'redux-form'
+import { Button, TextArea, Form } from 'semantic-ui-react'
+import { Mutation } from 'react-apollo'
+import gql from 'graphql-tag'
+
+const POST_CREATENEWS = gql`
+  mutation postcreateNews($topic: String!, $description: String!) {
+    createNews (data: {topic:$topic,description:$description}){
+      id
+    }
+  }
+`
 
 class Create_News extends Component {
-
+  state = {
+    topic: '',
+    description: '',
+  }
   render() {
-    const { handleSubmit } = this.props
+    const { topic, description } = this.state
     return (
-      <form onSubmit={handleSubmit} className='ui form'>
-        <div className='field'>
-          <Field
-            name="title"
-            component="input"
-            type="text"
-            placeholder="Input Titel"
-            autoComplete='off'
+      <Form>
+        <Form.Field>
+          <label>Topic</label>
+          <input 
+            value={topic}
+            placeholder='topic'
+            onChange={e => this.setState({ topic: e.target.value })}
           />
-        </div>
-        <div className='field'>
-          <Field
-            name="detail"
-            component="textarea"
-            type="text"
-            placeholder="Input Detail"
+        </Form.Field>
+        <Form.Field>
+          <label>Description</label>
+          <TextArea 
+            value={description}
+            placeholder='description' 
+            onChange={e => this.setState({ description: e.target.value })}
           />
-        </div>
-        <button type="submit" className='ui button'>SAVE</button>
-      </form>
+        </Form.Field>
+
+        <Mutation mutation={POST_CREATENEWS} variables={{ topic, description }}>
+          {PostcreateNews => <Button onClick={PostcreateNews}>SAVE</Button>}
+        </Mutation>
+      </Form>
+        
     )
   }
 }
-
-Create_News = reduxForm({
-  form: 'Create_News'
-})(Create_News)
 
 export default Create_News

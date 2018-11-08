@@ -1,37 +1,39 @@
 import React, { Component } from 'react'
 import './Page_News.css'
-import { connect } from 'react-redux'
-import { newsAction } from '../../redux/action/news'
 import CardList from '../../components/cardList/index/CardList'
+import { Query } from 'react-apollo'
+import gql from 'graphql-tag'
 
-class Template_News_all extends Component {  
-  render() {
-    const { news } = { ...this.props }
-    if (news.length === 0) {
-      this.props.getNewsAll()
-      return ''
-    } else {
-    return (
-      <div className='ui container padding-news-top'>
-          <CardList news={news}/>
-      </div>
-    )
+const allNews = gql`
+{
+  newses{
+    id
+    topic
+    description
+    user {
+      id
     }
   }
 }
+`
 
-function mapStateToProps(state) {
-  return {
-    news: [...state.News.data],
+class Template_News_all extends Component {  
+  render() {
+    return (
+      <Query query={allNews}>
+      {({ loading, error, data }) => {
+        if (loading) return <div>กำลังโหลดข่าว</div>
+        if (error) return <div>ไม่พบข่าวที่กำลังค้นหา</div>
+        const news = [...data.newses].reverse()
+        return (
+          <div className='ui container padding-news-top'>
+              <CardList news={news}/>
+          </div>
+        )
+      }}
+      </Query>
+    )
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return{
-      getNewsAll: () => {
-        dispatch(newsAction.getNewsAll())
-      }
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Template_News_all);
+export default Template_News_all;
