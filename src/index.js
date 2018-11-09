@@ -2,49 +2,50 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
 import * as serviceWorker from './serviceWorker'
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom"
 
 import 'semantic-ui-css/semantic.min.css'
-import Mainmenu from './route/Main_menu';
+import Mainmenu from './route/Main_menu'
 import { ApolloProvider } from 'react-apollo'
-import { ApolloClient } from 'apollo-client'
-import { resolvers, defaults } from './resolvers';
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import { withClientState } from 'apollo-link-state';
-import { HttpLink } from 'apollo-link-http';
-import { split } from 'apollo-link'
 import { WebSocketLink } from 'apollo-link-ws'
+// import { setContext } from 'apollo-link-context'
+import { ApolloClient } from 'apollo-client'
+import { split } from 'apollo-link'
 import { getMainDefinition } from 'apollo-utilities'
+import { createHttpLink } from 'apollo-link-http'
+import { InMemoryCache } from 'apollo-cache-inmemory'
 
-const cache = new InMemoryCache();
+const httpLink = createHttpLink({
+  uri: 'https://eu1.prisma.sh/kritsadapk-9996a4/hello-world/dev'
+})
 
-const typeDefs = `
-  type Modal {
-    id: Int!
-    show: Boolean!
-	}
-	
-  type Mutation {
-    toggleModal(id: Int!,show: Boolean!): Modal
-  }
+// const authLink = setContext((_, { headers }) => {
+//   return {
+//     headers: {
+//       ...headers
+//     }
+//   }
+// })
 
-  type Query {
-    modals: [Modal]
-  }
-`
+const wsLink = new WebSocketLink({
+  uri: 'wss://eu1.prisma.sh/kritsadapk-9996a4/hello-world/dev'
+})
+
+const link = split(
+  ({ query }) => {
+    const { kind, operation } = getMainDefinition(query)
+    return kind === 'OperationDefinition' && operation === 'subscription'
+  },
+  wsLink,
+  httpLink,
+)
+
 const client = new ApolloClient({
-  cache,
-  link: withClientState({
-    resolvers,
-    defaults,
-		cache,
-		typeDefs,
-  }).concat(
-    new HttpLink({
-      uri: `https://eu1.prisma.sh/kritsadapk-9996a4/hello-world/dev`,
-    }),
-  ),
-});
+  link,
+  cache: new InMemoryCache()
+})
+
+// https://eu1.prisma.sh/kritsadapk-9996a4/hello-world/dev
 
 ReactDOM.render(
 	<ApolloProvider client={client}>

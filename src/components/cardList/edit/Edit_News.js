@@ -2,11 +2,17 @@ import React, { Component } from 'react'
 import { Button, TextArea, Form } from 'semantic-ui-react'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
+// import { ALL_NEWS } from '../../../containers/pages/Page_News_all'
 
 const UPDATENEWS = gql`
   mutation UpdateNews($topic:String!,$description:String!,$id:ID!){
     updateNews(data:{topic:$topic,description:$description},where:{id:$id}){
       id
+      topic
+      description
+      user {
+        id
+      }
     }
   }
 `
@@ -19,12 +25,8 @@ class Edit_News extends Component {
 
   render() {
     const { topic, description } = this.state
-    const id = this.props.id
-    if(this.props.mess === 'error' )
-      return (
-        <div>ค้นหา ไม่เจอข่าวที่ต้องการแก้ไข</div>
-      )
-    else
+    const { history, id } = this.props
+    console.log(history)
       return (
         <Form>
           <Form.Field>
@@ -43,14 +45,27 @@ class Edit_News extends Component {
               onChange={e => this.setState({ description: e.target.value })}
             />
           </Form.Field>
-          <Mutation mutation={UPDATENEWS} variables={{ topic, description, id }}>
-            {(UpdateNews, { loading, error }) => (
-              <div>
-                <Button onClick={UpdateNews}>SAVE</Button>
-                {loading && <p>กำลังบันทึก</p>}
-                {error && <p>บันทึกไม่สำเร็จ ลองใหม่อีกครั้ง</p>}
-              </div>
-            )}
+          <Mutation 
+            mutation={UPDATENEWS} 
+            variables={{ topic, description, id }}
+            onCompleted={() => history.push('/')}
+            // update={( store, { data: { updateNews } } ) => {
+            //   console.log(updateNews)
+            //   const data = store.readQuery({ query: ALL_NEWS })
+            //   data.newses.push(updateNews)
+            //   store.writeQuery({
+            //     query: ALL_NEWS,
+            //     data
+            //   })
+            // }}
+          >
+              {(UpdateNews, { loading, error }) => (
+                <div>
+                  <Button onClick={UpdateNews}>SAVE</Button>
+                  {loading && <p>กำลังบันทึก</p>}
+                  {error && <p>บันทึกไม่สำเร็จ ลองใหม่อีกครั้ง</p>}
+                </div>
+              )}
           </Mutation>
         </Form>
       )

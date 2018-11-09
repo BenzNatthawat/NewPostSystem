@@ -6,7 +6,7 @@ class Template_News_all extends Component {
   render() {
     return (
       <div className='ui container padding-news-top'>
-          <CreateNews />
+          <CreateNews history={this.props.history}/>
       </div>
     )
   }

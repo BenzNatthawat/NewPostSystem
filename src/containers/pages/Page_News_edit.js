@@ -25,7 +25,7 @@ class Template_News_edit extends Component {
             const news = {...data.news}
             return (
               <div className='ui container padding-news-top'>
-                <EditNews newsall={news} id={id}/>
+                <EditNews newsall={news} id={id} history={this.props.history}/>
               </div>
             )
           }}
