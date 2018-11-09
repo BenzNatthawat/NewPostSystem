@@ -55,9 +55,9 @@ class Page_News_all extends Component {
         if (loading) return <div>กำลังโหลดข่าว</div>
         if (error) return <div>ไม่พบข่าวที่กำลังค้นหา</div>
         
+        const news = [...data.newses].reverse()
         this._subscribeToNewsUpdate(subscribeToMore)
         this._subscribeToNewsCreate(subscribeToMore)
-        const news = [...data.newses].reverse()
 
         return (
           <div className='ui container padding-news-top'>
@@ -82,15 +82,7 @@ class Page_News_all extends Component {
       document: NEWS_CREATE_SUBSCRIPTION,
       updateQuery: (prev, { subscriptionData }) => {
         if (!subscriptionData.data) return prev
-        console.log(subscriptionData.data)
-        const newLink = "subscriptionData.data.news.node"
-        Object.assign({}, prev, {
-          newses: {
-            newses: [newLink, ...prev.newses],
-            count: prev.newses.length + 1,
-            __typename: prev.newses.__typename
-          }
-        })
+        return prev.newses.push(subscriptionData.data.news.node)
       }
     })
   }
