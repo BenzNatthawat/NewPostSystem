@@ -2,32 +2,24 @@ import React, { Component } from 'react'
 import './Card.css'
 import { NavLink } from 'react-router-dom'
 import { Button } from 'semantic-ui-react'
-import { Mutation } from 'react-apollo'
-import gql from 'graphql-tag'
-
-const DELETENEWS = gql`
-  mutation DeleteNews( $id:ID! ) {
-    deleteNews( where:{ id: $id } ){
-      id
-    }
-}
-`
+import store from '../../../varibal'
 
 class ButtonExampleEmphasisShorthand extends Component {
 
+  Modal = (cardid) => {
+    store.show = true
+    store.cardid = cardid
+  }
+  
   render() {
-    const id = this.props.cardid
     return (
     <div className='footer-button'>
       <NavLink to={`news/${this.props.cardid}`}><Button color='teal' content='Edit' /></NavLink >
-        <Mutation mutation={DELETENEWS} variables={{ id }}>
-          {DeleteNews  => {
-            return <Button color='red' onClick={DeleteNews}>DELETE</Button>}
-          }
-        </Mutation>
+      <Button color='red' onClick={() => {this.Modal(this.props.cardid); this.props.action()} }>Delete</Button>
     </div>
     )
   }
+
 } 
 
 export default ButtonExampleEmphasisShorthand
