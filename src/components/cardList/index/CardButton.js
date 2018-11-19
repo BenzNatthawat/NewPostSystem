@@ -5,14 +5,20 @@ import { Button } from 'semantic-ui-react'
 import { ModalStoreConsumer } from '../../../hook/ModalStoreProvider'
 
 class ButtonExampleEmphasisShorthand extends Component {
-
-  
   render() {
+
+  const { cardid } = this.props
+
     return (
     <div className='footer-button'>
-      <NavLink to={`news/${this.props.cardid}`}><Button color='teal' content='Edit' /></NavLink >
+      <NavLink to={`news/${cardid}`}><Button color='teal' content='Edit' /></NavLink >
       <ModalStoreConsumer>
-        {store => (<Button color='red' onClick={() => {store.submitModal(true, this.props.cardid)}}>Delete</Button>)}
+        {store => {
+          const handleShowModal = () => {
+            store.submitModal(cardid, true, 'ท่านต้องการที่จะลบข่าวนี้ ใช่หรือไม่')
+          }
+          return (<Button color='red' onClick={() => handleShowModal()}>Delete</Button>)}
+        }
       </ModalStoreConsumer>
     </div>
     )

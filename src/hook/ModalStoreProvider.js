@@ -1,17 +1,21 @@
 import React from 'react'
 
-export const ModalStoreContext = React.createContext();
+const ModalStoreContext = React.createContext(); //
 export const ModalStoreProvider = ({ children }) => {
   const [Modal, setModal] = React.useState(
     {
+      id: '',
       show: false,
-      cardid: ''
+      message: 'ท่านต้องการที่จะลบ ใช่หรือไม่'
     }
   )
   const store = {
     Modal,
-    submitModal: (show, cardid) => {
-      return setModal({ show, cardid })
+    submitModal: ( id='', show=false, message='ท่านต้องการที่จะลบ ใช่หรือไม่' ) => {
+      if(id !== null || id !== '')
+        return setModal({ show, id, message })
+      else
+        return setModal({ show, id, message })
     }
   }
   return (

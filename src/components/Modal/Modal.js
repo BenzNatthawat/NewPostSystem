@@ -13,27 +13,26 @@ const DELETENEWS = gql`
 `
 
 const Modal_del = () => {
-  const {cardid} = ''
   return (
     <div>
     <ModalStoreConsumer>
       {store => {
-        const id = store.Modal.cardid
-        const handleShowModal = (cardid) => {
-          store.submitModal(false, cardid);
+        const id = store.Modal.id
+        const handleCloseModal = () => {
+          store.submitModal('');
         }
         return (
         <Modal size='mini' open={store.Modal.show}>
           <Modal.Header>แน่ใจ!!!!</Modal.Header>
             <Modal.Content>
-              <p>ท่านแน่ใจหรือไม่ที่จะลบข่าวนี้ ไอดี:{cardid}</p>
+              <p>{store.Modal.message} : {store.Modal.id}</p>
             </Modal.Content>
             <Modal.Actions>
-              <Button negative onClick={() => handleShowModal('')}>ยกเลิก</Button>
+              <Button negative onClick={() => handleCloseModal()}>ยกเลิก</Button>
               <Mutation mutation={DELETENEWS} variables={{ id }}>
               {DeleteNews  => {
                 return <Button color='green' onClick={() => {
-                  handleShowModal('')
+                  handleCloseModal()
                   DeleteNews()
                 }}>
                   ตกลง

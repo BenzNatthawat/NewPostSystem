@@ -38,7 +38,6 @@ class CardExampleFluid extends Component {
 						/>
 					) 
 				})
-
 			return (
 				<div>
 				<Card.Group>
