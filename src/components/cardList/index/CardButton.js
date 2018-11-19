@@ -12,12 +12,7 @@ class ButtonExampleEmphasisShorthand extends Component {
     <div className='footer-button'>
       <NavLink to={`news/${this.props.cardid}`}><Button color='teal' content='Edit' /></NavLink >
       <ModalStoreConsumer>
-        {store => {
-          const handleShowModal = (cardid) => {
-            store.submitModal(true, cardid);
-          }
-          return (<Button color='red' onClick={() => {handleShowModal(this.props.cardid)} }>Delete</Button>)
-        }}
+        {store => (<Button color='red' onClick={() => {store.submitModal(true, this.props.cardid)}}>Delete</Button>)}
       </ModalStoreConsumer>
     </div>
     )
