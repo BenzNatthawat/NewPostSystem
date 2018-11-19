@@ -49,11 +49,11 @@ const client = new ApolloClient({
 
 ReactDOM.render(
 	<ApolloProvider client={client}>
-		<Router>
-      <ModalStoreProvider>
+		<ModalStoreProvider>
+      <Router>
 			  <Mainmenu/>
-      </ModalStoreProvider>
-		</Router>
+		  </Router>
+    </ModalStoreProvider>
 	</ApolloProvider>
 
 	, document.getElementById('root')

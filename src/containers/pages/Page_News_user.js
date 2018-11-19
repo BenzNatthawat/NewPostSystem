@@ -4,6 +4,7 @@ import CardList from '../../components/cardList/index/CardList'
 
 class Template_News_user extends Component { 
   render() {
+    console.log(this.props)
     const { news_user } = { ...this.props }
     if (news_user.length === 0 || news_user[0].err ) {
       this.props.getNews_only_user()

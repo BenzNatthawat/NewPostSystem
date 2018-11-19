@@ -13,7 +13,7 @@ class Menu_news extends Component{
       <Switch>
         <Route exact path='/' component={Page_News_all} />
         <Route path='/news/:id' component={Page_News_edit} />
-        <PrivateRoute path='/name' componen t={Page_News_user} />
+        <PrivateRoute path='/name' component={Page_News_user} />
         <Route path='/add' component={Page_News_create} />
         <Redirect to="/"/>
       </Switch>
