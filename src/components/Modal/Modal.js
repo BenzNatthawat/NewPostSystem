@@ -4,12 +4,12 @@ import gql from 'graphql-tag'
 import { Mutation } from 'react-apollo'
 import { ModalStoreConsumer } from '../../hook/ModalStoreProvider'
 
-const DELETENEWS = gql`
+const DELETE = gql`
   mutation DeleteNews( $id:ID! ) {
     deleteNews( where:{ id: $id } ){
       id
     }
-}
+  }
 `
 
 const Modal_del = () => {
@@ -29,7 +29,7 @@ const Modal_del = () => {
             </Modal.Content>
             <Modal.Actions>
               <Button negative onClick={() => handleCloseModal()}>ยกเลิก</Button>
-              <Mutation mutation={DELETENEWS} variables={{ id }}>
+              <Mutation mutation={DELETE} variables={{ id }}>
               {DeleteNews  => {
                 return <Button color='green' onClick={() => {
                   handleCloseModal()
