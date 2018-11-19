@@ -2,20 +2,23 @@ import React, { Component } from 'react'
 import './Card.css'
 import { NavLink } from 'react-router-dom'
 import { Button } from 'semantic-ui-react'
-import store from '../../../varibal'
+import { ModalStoreConsumer } from '../../../hook/ModalStoreProvider'
 
 class ButtonExampleEmphasisShorthand extends Component {
 
-  Modal = (cardid) => {
-    store.show = true
-    store.cardid = cardid
-  }
   
   render() {
     return (
     <div className='footer-button'>
       <NavLink to={`news/${this.props.cardid}`}><Button color='teal' content='Edit' /></NavLink >
-      <Button color='red' onClick={() => {this.Modal(this.props.cardid); this.props.action()} }>Delete</Button>
+      <ModalStoreConsumer>
+        {store => {
+          const handleShowModal = (cardid) => {
+            store.submitModal(true, cardid);
+          }
+          return (<Button color='red' onClick={() => {handleShowModal(this.props.cardid)} }>Delete</Button>)
+        }}
+      </ModalStoreConsumer>
     </div>
     )
   }

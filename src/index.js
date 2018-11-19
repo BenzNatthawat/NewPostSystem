@@ -13,6 +13,7 @@ import { split } from 'apollo-link'
 import { getMainDefinition } from 'apollo-utilities'
 import { createHttpLink } from 'apollo-link-http'
 import { InMemoryCache } from 'apollo-cache-inmemory'
+import { ModalStoreProvider } from './hook/ModalStoreProvider'
 
 const httpLink = createHttpLink({
   uri: 'https://eu1.prisma.sh/kritsadapk-9996a4/hello-world/dev'
@@ -49,7 +50,9 @@ const client = new ApolloClient({
 ReactDOM.render(
 	<ApolloProvider client={client}>
 		<Router>
-			<Mainmenu/>
+      <ModalStoreProvider>
+			  <Mainmenu/>
+      </ModalStoreProvider>
 		</Router>
 	</ApolloProvider>
 

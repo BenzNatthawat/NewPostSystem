@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import './Page_News.css'
-import { connect } from 'react-redux'
-import { newsAction } from '../../redux/action/news'
 import CardList from '../../components/cardList/index/CardList'
 
 class Template_News_user extends Component { 
@@ -21,21 +19,4 @@ class Template_News_user extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  if(state.News.data_user.length === 0)
-    return {news_user:[{err:null}]}
-  else
-    return {
-      news_user: [...state.News.data_user],
-    }
-}
-
-const mapDispatchToProps = (dispatch) => {
-    return{
-      getNews_only_user: () => {
-        dispatch(newsAction.getNews_only_user())
-      }
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Template_News_user);
+export default Template_News_user;
