@@ -57,6 +57,7 @@ const NEWS_DELETED_SUBSCRIPTION = gql`
 
 class Page_News_all extends Component {  
   render() {
+    const userId = localStorage.getItem('user_login')
     return (
       <Query query={ALL_NEWS}>
       {({ loading, error, data, subscribeToMore }) => { 
@@ -71,7 +72,7 @@ class Page_News_all extends Component {
 
         return (
           <div className='ui container padding-news-top'>
-              <CardList news={news}/>
+              <CardList news={news} userId={userId} />
           </div>
         )
       }}
@@ -91,23 +92,17 @@ class Page_News_all extends Component {
     subscribeToMore({
       document: NEWS_CREATE_SUBSCRIPTION,
       updateQuery: (prev, { subscriptionData }) => { 
-        var nextState
-        console.log(subscriptionData.data.news.node)
-        console.log(prev)
-        prev.newses.push(subscriptionData.data.news.node)
-        nextState = {
-          ...prev,
-          newses: prev.newses,
-          length: prev.newses.length+1 
-
+        let nextState
+        const { newses } = { ...prev }
+        if( newses[newses.length-1].id !== subscriptionData.data.news.node.id){
+          newses.push(subscriptionData.data.news.node)
+          nextState = {
+            ...prev,
+            newses: newses
+          }
+          return nextState
         }
-        console.log(nextState.newses.length)
-        return nextState
-      } 
-      // updateQuery: (prev, { subscriptionData }) => {
-      //   if (!subscriptionData.data) return prev
-      //   return prev.newses.push(subscriptionData.data.news.node)
-      // }
+      }
     })
   }
   _subscribeToNewsDeleted = subscribeToMore => {

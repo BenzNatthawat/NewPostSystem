@@ -8,15 +8,15 @@ const Modal_del = () => {
     <div>
     <ModalStoreConsumer>
       {store => {
-        const { id, functionGql } = store.Modal
+        const { id, functionGql, message, show } = store.Modal
         const handleCloseModal = () => {
           store.submitModal('');
         }
         return (
-        <Modal size='mini' open={store.Modal.show}>
+        <Modal size='mini' open={show}>
           <Modal.Header>แน่ใจ!!!!</Modal.Header>
             <Modal.Content>
-              <p>{store.Modal.message} : {store.Modal.id}</p>
+              <p>{message} : {id}</p>
             </Modal.Content>
             <Modal.Actions>
               <Button negative onClick={() => handleCloseModal()}>ยกเลิก</Button>

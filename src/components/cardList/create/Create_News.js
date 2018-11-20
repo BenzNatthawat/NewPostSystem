@@ -5,8 +5,8 @@ import gql from 'graphql-tag'
 import { ALL_NEWS } from '../../../containers/pages/Page_News_all'
 
 const POST_CREATENEWS = gql`
-  mutation postcreateNews($topic: String!, $description: String!) {
-    createNews (data: {topic:$topic,description:$description}){
+  mutation postcreateNews($topic: String!, $description: String!, $user: UserCreateOneInput) {
+    createNews (data: {topic:$topic,description:$description,user:$user}){
       id
       topic
       description
@@ -23,6 +23,14 @@ class Create_News extends Component {
     description: '',
   }
   render() {
+    let user = null
+    if( localStorage.getItem('user_login') !== null ){
+      user = {
+        connect: {
+          id: localStorage.getItem('user_login')
+        }
+      }
+    }
     const { topic, description } = this.state
     return (
       <Form>
@@ -45,7 +53,7 @@ class Create_News extends Component {
 
         <Mutation 
           mutation={POST_CREATENEWS}
-          variables={{ topic, description }}
+          variables={{ topic, description, user }}
           onCompleted={() => this.props.history.push('/')}
           update={(store, { data: { createNews } }) => {
             const data = store.readQuery({ query: ALL_NEWS })

@@ -6,28 +6,15 @@ import Modal from '../../Modal/Modal'
 
 class CardExampleFluid extends Component {
 
-	constructor(props) {
-		super(props)
-
-		// Set some state
-		this.state = {
-				show: false
-		};
-	}
-	handler = () => {
-		this.setState({
-			show: true
-		});
-	}
-
 	render() {
 		if(this.props.news[0].err!==null){
 			const News_one = (this.props.news).map((news) => {
 				let button = null
-				if(1)
-				// if(news.user !== null)
-					// if( "cjo54w9jw1czt0a42eqhrfcnh" === news.user.id )
-						button = <CardButton cardid={news.id} action={this.handler}/>
+				if( news.node !== undefined )
+					news = news.node
+				if(news.user !== null)
+					if( this.props.userId === news.user.id )
+						button = <CardButton cardid={news.id}/>
 				else 
 					button = ''
 					return (
