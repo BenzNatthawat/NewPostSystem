@@ -5,7 +5,8 @@ create by ReactJs
  - graphql
  - react-apollo
  - react-router-dom
-
+ - localStorage
+ 
 prisma
  [URL API](https://eu1.prisma.sh/kritsadapk-9996a4/hello-world/dev)
 

@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Button, TextArea, Form } from 'semantic-ui-react'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
-// import { ALL_NEWS } from '../../../containers/pages/Page_News_all'
 
 const UPDATENEWS = gql`
   mutation UpdateNews($topic:String!,$description:String!,$id:ID!){
@@ -26,7 +25,7 @@ class Edit_News extends Component {
   render() {
     const { topic, description } = this.state
     const { history, id } = this.props
-    console.log(history)
+
       return (
         <Form>
           <Form.Field>
@@ -49,15 +48,6 @@ class Edit_News extends Component {
             mutation={UPDATENEWS} 
             variables={{ topic, description, id }}
             onCompleted={() => history.push('/')}
-            // update={( store, { data: { updateNews } } ) => {
-            //   console.log(updateNews)
-            //   const data = store.readQuery({ query: ALL_NEWS })
-            //   data.newses.push(updateNews)
-            //   store.writeQuery({
-            //     query: ALL_NEWS,
-            //     data
-            //   })
-            // }}
           >
               {(UpdateNews, { loading, error }) => (
                 <div>
