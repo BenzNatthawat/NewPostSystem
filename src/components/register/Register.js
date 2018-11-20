@@ -82,7 +82,14 @@ class registerForm extends Component {
                   value={repassword}
                   onChange={e => this.setState({ repassword: e.target.value}) }
                 />
-              <Mutation mutation={POST_CREATEUSER} variables={{ name, username, password }}>
+              <Mutation 
+                mutation={POST_CREATEUSER} 
+                variables={{ name, username, password }}
+                onCompleted={ data => {
+                  window.localStorage.setItem( 'user_login', data.createUser.id )
+                  this.props.history.push('/')
+                }}
+              >
                 {PostcreateUser => <Button color='teal' fluid size='large' onClick={PostcreateUser}>Register</Button>}
               </Mutation>
               </Segment>
