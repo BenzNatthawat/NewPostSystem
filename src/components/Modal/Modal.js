@@ -1,23 +1,14 @@
 import React from 'react'
 import { Button, Modal } from 'semantic-ui-react'
-import gql from 'graphql-tag'
 import { Mutation } from 'react-apollo'
 import { ModalStoreConsumer } from '../../hook/ModalStoreProvider'
-
-const DELETE = gql`
-  mutation DeleteNews( $id:ID! ) {
-    deleteNews( where:{ id: $id } ){
-      id
-    }
-  }
-`
 
 const Modal_del = () => {
   return (
     <div>
     <ModalStoreConsumer>
       {store => {
-        const id = store.Modal.id
+        const { id, functionGql } = store.Modal
         const handleCloseModal = () => {
           store.submitModal('');
         }
@@ -29,7 +20,7 @@ const Modal_del = () => {
             </Modal.Content>
             <Modal.Actions>
               <Button negative onClick={() => handleCloseModal()}>ยกเลิก</Button>
-              <Mutation mutation={DELETE} variables={{ id }}>
+              <Mutation mutation={functionGql} variables={{ id }}>
               {DeleteNews  => {
                 return <Button color='green' onClick={() => {
                   handleCloseModal()

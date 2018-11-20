@@ -15,16 +15,16 @@ export const ModalStoreProvider = ({ children }) => {
       id: '',
       show: false,
       message: 'ท่านต้องการที่จะลบ ใช่หรือไม่',
-      functionGql: ''
+      functionGql: { defaultgql: () => null }
   })
   const store = {
     Modal,
-    submitModal: ( id='', show=false, message='ท่านต้องการที่จะลบ ใช่หรือไม่', functionGql='' ) => {
+    submitModal: ( id='', show=false, functionGql={ defaultgql: () => null }, message='ท่านต้องการที่จะลบ ใช่หรือไม่' ) => {
       /* ฟังก์ชันกำหนดค่า state รับค่า 4 ค่า
         | id          : id ต้องการให้เกิดคำสั่ง ไม่มีค่าเริ่มต้น
         | show        : คำสั่งให้แสดงหรือซ่อน มีค่าเริ่มต้น false รับได้เพียง true และ false
+        | functionGql : รับค่า gql สำหรับสั่งการทำงานไปยัง API มีค่าเริ่มต้น
         | message     : ข้อความที่ต้องการให้แสดงใน Modal มีค่าเริ่มต้น 
-        | functionGql : ฟังก์ชันที่ต้องให้สั่งไปหา API มีค่าเริ่มต้น
       */
       if(id !== null || id !== '')
         return setModal({ show, id, message, functionGql })
