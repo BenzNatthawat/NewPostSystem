@@ -5,11 +5,6 @@ import { Link } from 'react-router-dom'
 
 const LoginForm = () => (
   <div className='login-form'>
-    {/*
-      Heads up! The styles below are necessary for the correct render of this example.
-      You can do same with CSS, the main idea is that all the elements up to the `Grid`
-      below must have a height of 100%.
-    */}
     <style>{`
       body > div,
       body > div > div,

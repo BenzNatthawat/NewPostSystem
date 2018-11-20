@@ -95,7 +95,7 @@ class registerForm extends Component {
               </Segment>
               
             </Form>
-            <Link to="/"><Icon name='arrow alternate circle left outline' size='large' />Back</Link>
+            <Link to='/' style={{margin:'10px',display:'block'}}><Icon disabled name='home' size='large' />Home</Link>
 
           </Grid.Column>
         </Grid>
